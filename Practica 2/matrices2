@@ -1,0 +1,51 @@
+F, C=6, 6
+matriz = [[0 for _ in range(C)] for _ in range(F)]
+
+def Reserva(fila, col):
+    f,c= fila - 1, col -1
+    if not matriz[f][c]:
+        matriz[f][c] = True
+        return "OK: reservado"
+    else:
+        return "RECHAZO: Ocupado"
+    
+def Liberar(fila, col):
+    f,c= fila - 1, col -1
+    if matriz[f][c]:
+        matriz[f][c] = False
+        return "OK: liberado"
+    else:
+        return "RECHAZO: ya libre"
+        
+def Consultar(fila, col):
+    f,c= fila - 1, col -1
+    if matriz[f][c]:
+        return "Estado : Ocupado"
+    else:            
+        return "Libre"
+        
+print(Reserva(1, 1))
+print(Reserva(1, 2))
+print(Reserva(1, 1))
+print(Consultar(1, 1))
+print(Liberar(1, 1))
+print(Liberar(1, 1))
+print(Reserva(3, 4))
+print(Reserva(6, 6))
+print(Consultar(6, 6))
+print(Reserva(2, 5))
+
+
+totalReservados = sum(fila.count(True) for fila in matriz)
+
+maxReserverdaso=-1
+filaMasReservada= -1
+
+for i in range(len(matriz)):
+    contFila = matriz[i].count(True)
+    if contFila > maxReserverdaso:
+        maxReserverdaso = contFila
+        filaMasReservada = i + 1
+        
+print("Total de asientos reservados:", totalReservados)
+print("Fila más reservada:", filaMasReservada)
